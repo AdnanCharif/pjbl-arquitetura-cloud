@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        <h1>Prato</h1>
+        <h1>Restaurantes</h1>
         <p>Escolha um restaurante e veja o cardápio completo</p>
       </header>
 
