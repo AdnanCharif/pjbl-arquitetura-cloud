@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     fetch(API_URL)
       .then((res) => {
-        if (!res.ok) throw new Error("Erro ao buscar filmes");
+        if (!res.ok) throw new Error("Erro ao buscar restaurantes");
         return res.json();
       })
       .then((data) => {
