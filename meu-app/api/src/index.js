@@ -1,1 +1,1 @@
-require("./functions/movies");
+require("./functions/restaurants");

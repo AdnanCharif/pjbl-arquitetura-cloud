@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
-import MovieList from "./components/MovieList";
-import MovieDetail from "./components/MovieDetail";
+import RestaurantList from "./components/RestaurantList";
+import RestaurantDetail from "./components/RestaurantDetail";
 import "./App.css";
 
 // URL da Azure Function. Durante o desenvolvimento local, o SWA CLI
 // expoe a API em /api automaticamente. Depois de publicar, o mesmo
 // caminho "/api/movies" continua funcionando porque o Static Web Apps
 // roteia /api/* para a Function associada.
-const API_URL = "/api/movies";
+const API_URL = "/api/restaurants";
 
 function App() {
-  const [movies, setMovies] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        setMovies(data);
+        setRestaurants(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -31,26 +31,26 @@ function App() {
       });
   }, []);
 
-  const selectedMovie = movies.find((m) => m.id === selectedId);
+  const selectedRestaurant = restaurants.find((m) => m.id === selectedId);
 
   return (
     <div className="app">
       <header className="header">
-        <h1>🎬 Catálogo de Filmes</h1>
+        <h1>Delivery App</h1>
       </header>
 
-      {loading && <p className="status">Carregando filmes...</p>}
+      {loading && <p className="status">Carregando restaurantes...</p>}
       {error && <p className="status error">Erro: {error}</p>}
 
       {!loading && !error && (
         <>
-          {selectedMovie ? (
-            <MovieDetail
-              movie={selectedMovie}
+          {selectedRestaurant ? (
+            <RestaurantDetail
+              restaurant={selectedRestaurant}
               onBack={() => setSelectedId(null)}
             />
           ) : (
-            <MovieList movies={movies} onSelect={setSelectedId} />
+            <RestaurantList restaurants={restaurants} onSelect={setSelectedId} />
           )}
         </>
       )}
