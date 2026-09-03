@@ -3,10 +3,9 @@ import RestaurantList from "./components/RestaurantList";
 import RestaurantDetail from "./components/RestaurantDetail";
 import "./App.css";
 
-// URL da Azure Function. Durante o desenvolvimento local, o SWA CLI
-// expoe a API em /api automaticamente. Depois de publicar, o mesmo
-// caminho "/api/movies" continua funcionando porque o Static Web Apps
-// roteia /api/* para a Function associada.
+// URL da Azure Function / função serverless. O mesmo caminho "/api/restaurants"
+// funciona tanto no Azure Static Web Apps quanto na Vercel, pois os dois
+// roteiam /api/* para a function correspondente.
 const API_URL = "/api/restaurants";
 
 function App() {
@@ -31,12 +30,13 @@ function App() {
       });
   }, []);
 
-  const selectedRestaurant = restaurants.find((m) => m.id === selectedId);
+  const selectedRestaurant = restaurants.find((r) => r.id === selectedId);
 
   return (
     <div className="app">
       <header className="header">
-        <h1>Delivery App</h1>
+        <h1>Prato</h1>
+        <p>Escolha um restaurante e veja o cardápio completo</p>
       </header>
 
       {loading && <p className="status">Carregando restaurantes...</p>}
