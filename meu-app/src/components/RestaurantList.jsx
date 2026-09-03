@@ -1,4 +1,4 @@
-function RestaurantList({ restaurant, onSelect }) {
+function RestaurantList({ restaurants, onSelect }) {
   return (
     <div className="restaurant-grid">
       {restaurants.map((restaurant) => (
