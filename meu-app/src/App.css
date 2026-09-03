@@ -94,3 +94,22 @@ body {
   line-height: 1.6;
   opacity: 0.9;
 }
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.menu-item span {
+  white-space: nowrap;
+  opacity: 0.85;
+}
