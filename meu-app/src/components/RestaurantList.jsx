@@ -7,9 +7,9 @@ function RestaurantList({ restaurants, onSelect }) {
           className="restaurant-card"
           onClick={() => onSelect(restaurant.id)}
         >
-          <img src={restaurant.poster} alt={restaurant.title} />
-          <h3>{restaurant.title}</h3>
-          <p>{restaurant.year}</p>
+          <img src={restaurant.image} alt={restaurant.name} />
+          <h3>{restaurant.name}</h3>
+          <p>{restaurant.category} • {restaurant.deliveryTime}</p>
         </div>
       ))}
     </div>
