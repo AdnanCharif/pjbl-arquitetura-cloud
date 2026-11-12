@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Tag das imagens (ex.: v1)
+        description: "Tag das imagens (ex.: v1)"
         required: true
         default: v1
 
