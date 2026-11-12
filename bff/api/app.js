@@ -12,6 +12,13 @@ export function createApp(h) {
   const app = express();
   app.use(cors());
   app.use(express.json({ limit: '1mb' }));
+  // Log de cada requisição (aparece em Logs no Render): mostra que as chamadas passam pelo BFF.
+  app.use((req, res, next) => {
+    if (req.path === '/health') return next();
+    const inicio = Date.now();
+    res.on('finish', () => console.log(`[BFF] ${req.method} ${req.originalUrl} -> ${res.statusCode} (${Date.now() - inicio} ms)`));
+    next();
+  });
 
   app.get('/health', (_req, res) => sendJson(res, 200, { status: 'ok', service: 'bff' }));
   app.get('/openapi.json', (_req, res) => sendJson(res, 200, openapi));
