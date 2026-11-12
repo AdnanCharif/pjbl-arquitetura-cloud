@@ -1,0 +1,20 @@
+{
+  "name": "pjbl-function-pedidos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Funções serverless (Vercel) do FastFood Delivery: cálculo do pedido (HTTP Trigger), enriquecimento de dados e consumidor de eventos (Message Trigger via Upstash QStash)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:arch": "node --test \"tests/architecture/*.test.js\"",
+    "local": "node scripts/local-server.js"
+  },
+  "devDependencies": {
+    "dependency-cruiser": "^16.3.0"
+  }
+}

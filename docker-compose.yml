@@ -1,0 +1,44 @@
+# Ambiente local completo: bancos + 2 microserviços + Function + BFF.
+#   docker compose up --build
+#   frontend: cd frontend && npm install && npm run dev   (VITE_API_URL=http://localhost:3000)
+# Na nuvem cada serviço roda separado (Render, Vercel, Atlas, Neon): ver docs/DEPLOY.md.
+services:
+  mongo:
+    image: mongo:7
+    ports: ["27017:27017"]
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pedidos
+    ports: ["5432:5432"]
+
+  function-pedidos:
+    build: ./function-pedidos
+    ports: ["3003:3003"]
+
+  ms-restaurantes:
+    build: ./ms-restaurantes
+    environment:
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DB: prato
+    ports: ["3001:3001"]
+    depends_on: [mongo]
+
+  ms-pedidos:
+    build: ./ms-pedidos
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/pedidos
+    ports: ["3002:3002"]
+    depends_on: [postgres]
+    restart: on-failure
+
+  bff:
+    build: ./bff
+    environment:
+      RESTAURANTS_URL: http://ms-restaurantes:3001
+      ORDERS_URL: http://ms-pedidos:3002
+      FUNCTION_URL: http://function-pedidos:3003
+    ports: ["3000:3000"]
+    depends_on: [ms-restaurantes, ms-pedidos, function-pedidos]
