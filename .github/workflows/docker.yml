@@ -1,0 +1,31 @@
+# Publica as imagens no Docker Hub. Dispare em Actions → "Docker Hub" → Run workflow,
+# informando a tag (ex.: v1). Requer os secrets DOCKERHUB_USERNAME e DOCKERHUB_TOKEN.
+name: Docker Hub
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag das imagens (ex.: v1)
+        required: true
+        default: v1
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ms-restaurantes, ms-pedidos, bff]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.service }}
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/pjbl-${{ matrix.service }}:${{ inputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/pjbl-${{ matrix.service }}:latest

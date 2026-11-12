@@ -1,0 +1,54 @@
+# Blueprint do Render (opcional): New → Blueprint → selecione este repositório.
+# Troque SEU_USUARIO pelo seu usuário do Docker Hub antes. As variáveis marcadas
+# com sync: false são pedidas na criação (não ficam no Git).
+services:
+  - type: web
+    name: pjbl-ms-restaurantes
+    runtime: image
+    plan: free
+    image:
+      url: docker.io/SEU_USUARIO/pjbl-ms-restaurantes:v1
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: prato
+      - key: QSTASH_TOKEN
+        sync: false
+      - key: EVENTS_DESTINATION_URL
+        sync: false
+
+  - type: web
+    name: pjbl-ms-pedidos
+    runtime: image
+    plan: free
+    image:
+      url: docker.io/SEU_USUARIO/pjbl-ms-pedidos:v1
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: PAYMENT_LIMIT
+        value: "500"
+      - key: QSTASH_TOKEN
+        sync: false
+      - key: EVENTS_DESTINATION_URL
+        sync: false
+
+  - type: web
+    name: pjbl-bff
+    runtime: image
+    plan: free
+    image:
+      url: docker.io/SEU_USUARIO/pjbl-bff:v1
+    healthCheckPath: /health
+    envVars:
+      - key: RESTAURANTS_URL
+        sync: false
+      - key: ORDERS_URL
+        sync: false
+      - key: FUNCTION_URL
+        sync: false
+      - key: UPSTREAM_TIMEOUT_MS
+        value: "60000"

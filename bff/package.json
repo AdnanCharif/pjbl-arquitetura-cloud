@@ -1,0 +1,24 @@
+{
+  "name": "pjbl-bff",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BFF (Backend for Frontend) do FastFood Delivery — Node.js + Express, agrega microserviços e Function",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "node --env-file=.env --watch api/server.js",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\" \"tests/api/*.test.js\"",
+    "test:arch": "node --test \"tests/architecture/*.test.js\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "dependency-cruiser": "^16.3.0",
+    "supertest": "^7.1.0"
+  }
+}

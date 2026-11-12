@@ -1,0 +1,9 @@
+/* Estilos globais mínimos; a identidade visual (tema escuro de cardápio) está em App.css. */
+:root {
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  color: #f2ebe0;
+}

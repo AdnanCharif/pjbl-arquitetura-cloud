@@ -1,0 +1,343 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastFood Delivery — API Gateway",
+    "version": "1.0.0",
+    "description": "Entrada única do frontend. Roteia para o BFF, exige API key (Authorization: Bearer <chave>) e limita requisições por IP."
+  },
+  "paths": {
+    "/aggregated-data": {
+      "get": {
+        "summary": "Dados agregados (MS Restaurantes + MS Pedidos + Function) (GET)",
+        "operationId": "get-aggregated-data",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      }
+    },
+    "/restaurants": {
+      "get": {
+        "summary": "Restaurantes (GET)",
+        "operationId": "get-restaurants",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      },
+      "post": {
+        "summary": "Restaurantes (POST)",
+        "operationId": "post-restaurants",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      }
+    },
+    "/restaurants/{id}": {
+      "get": {
+        "summary": "Restaurante por id (GET)",
+        "operationId": "get-restaurants-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Restaurante por id (PUT)",
+        "operationId": "put-restaurants-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Restaurante por id (DELETE)",
+        "operationId": "delete-restaurants-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/pedidos": {
+      "get": {
+        "summary": "Pedidos (GET)",
+        "operationId": "get-pedidos",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      },
+      "post": {
+        "summary": "Pedidos (POST)",
+        "operationId": "post-pedidos",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      }
+    },
+    "/pedidos/simular": {
+      "post": {
+        "summary": "Simular total do pedido (POST)",
+        "operationId": "post-pedidos-simular",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        }
+      }
+    },
+    "/pedidos/{id}": {
+      "get": {
+        "summary": "Pedido por id (GET)",
+        "operationId": "get-pedidos-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "summary": "Pedido por id (PUT)",
+        "operationId": "put-pedidos-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Pedido por id (DELETE)",
+        "operationId": "delete-pedidos-id",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "api-key-auth",
+              "rate-limit"
+            ]
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check do BFF (sem chave)",
+        "operationId": "get-health",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "baseUrl": "${env.BFF_URL}"
+            }
+          },
+          "policies": {
+            "inbound": [
+              "rate-limit"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
